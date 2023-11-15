@@ -13,7 +13,7 @@ int _erratoi(char *s)
 
 	if (*s == '+')
 		s++;  /* TODO: why does this make main return 255? */
-	for (i = 0;  s[i] != '\0'; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
 		{
@@ -26,24 +26,6 @@ int _erratoi(char *s)
 			return (-1);
 	}
 	return (result);
-}
-
-/**
- * print_error - prints an error message
- * @info: the parameter & return info struct
- * @estr: string containing specified error type
- * Return: 0 if no numbers in string, converted number otherwise
- *        -1 on error
- */
-void print_error(info_t *info, char *estr)
-{
-	_eputs(info->fname);
-	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
-	_eputs(": ");
-	_eputs(info->argv[0]);
-	_eputs(": ");
-	_eputs(estr);
 }
 
 /**
@@ -86,6 +68,24 @@ int print_d(int input, int fd)
 }
 
 /**
+ * print_error - prints an error message
+ * @info: the parameter & return info struct
+ * @estr: string containing specified error type
+ * Return: 0 if no numbers in string, converted number otherwise
+ *        -1 on error
+ */
+void print_error(info_t *info, char *estr)
+{
+	_eputs(info->fname);
+	_eputs(": ");
+	print_d(info->line_count, STDERR_FILENO);
+	_eputs(": ");
+	_eputs(info->argv[0]);
+	_eputs(": ");
+	_eputs(estr);
+}
+
+/**
  * convert_number - converter function, a clone of itoa
  * @num: number
  * @base: base
@@ -111,7 +111,7 @@ char *convert_number(long int num, int base, int flags)
 	ptr = &buffer[49];
 	*ptr = '\0';
 
-	do	{
+	do {
 		*--ptr = array[n % base];
 		n /= base;
 	} while (n != 0);
@@ -138,3 +138,4 @@ void remove_comments(char *buf)
 			break;
 		}
 }
+
